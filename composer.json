@@ -1,0 +1,7 @@
+{
+	"name": "fyrkat/vue-api",
+	"description": "API for organising media files",
+	"type": "project",
+	"license": "BSD-3-Clause",
+	"require": {}
+}
