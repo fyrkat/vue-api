@@ -1,6 +1,7 @@
 # this is the config file for vue-api
 
+base_url = "http://localhost:1081/api"
+
 [root_collection]
 type = "filesystem"
 path = "/pub/media"
-base_url = "http://localhost:1081/api"

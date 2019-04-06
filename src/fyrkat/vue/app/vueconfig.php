@@ -11,8 +11,8 @@ class VueConfig {
 	public static function getConfig(): VueConfig
 	{
 		if ( null === static::$globalConfig ) {
-			$config_file = implode(DIRECTORY_SEPARATOR, [dirname(__DIR__), 'config.toml']);
-			$config = Toml::ParseFile( $config_file, true );
+			$configFile = implode( DIRECTORY_SEPARATOR, [dirname( __DIR__, 4 ), 'config.toml'] );
+			$config = Toml::ParseFile( $configFile );
 			static::$globalConfig = new VueConfig( $config );
 		}
 		return static::$globalConfig;
@@ -20,34 +20,34 @@ class VueConfig {
 
 	private $config;
 
-	public function __construct( stdObject $config )
+	public function __construct( array $config )
 	{
 		$this->config = $config;
 	}
 
 	public function getRootCollectionPath(): string {
-		$result = $this->config->root_collection->path;
+		$result = $this->config['root_collection']['path'];
 		if ( !is_string( $result ) ) {
-			throw new \ConfigException( 'root_collection.path must be string' );
+			throw new ConfigException( 'root_collection.path must be string' );
 		}
 		return $result;
 	}
 
 	public function getRootCollectionType(): string {
-		$result = $this->config->root_collection->type;
+		$result = $this->config['root_collection']['type'];
 		if ( !is_string( $result ) ) {
-			throw new \ConfigException( 'root_collection.type must be string' );
+			throw new ConfigException( 'root_collection.type must be string' );
 		}
 		if ( preg_match( '/[^a-z]/', $result ) ) {
-			throw new \ConfigException( 'root_collection.type can only contain lowercase [a-z]' );
+			throw new ConfigException( 'root_collection.type can only contain lowercase [a-z]' );
 		}
 		return $result;
 	}
 
-	public function getRootCollectionBaseUrl(): string {
-		$result = $this->config->root_collection->base_url;
+	public function getBaseUrl(): string {
+		$result = $this->config['base_url'];
 		if ( !is_string( $result ) ) {
-			throw new \ConfigException( 'root_collection.base_url must be string' );
+			throw new ConfigException( 'base_url must be string' );
 		}
 		return $result;
 	}
