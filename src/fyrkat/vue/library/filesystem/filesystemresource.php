@@ -4,7 +4,7 @@ namespace fyrkat\vue\library\filesystem;
 
 use fyrkat\vue\library\Resource;
 
-class FilesystemResource implements Resource
+class FilesystemResource extends FilesystemItem implements Resource
 {
 	public function getSha1()
 	{

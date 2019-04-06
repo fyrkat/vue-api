@@ -2,7 +2,7 @@
 
 namespace fyrkat\vue\library;
 
-interface Item
+interface Item extends \JsonSerializable
 {
 	function getName();
 	function getTitle();

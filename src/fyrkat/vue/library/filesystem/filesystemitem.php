@@ -27,6 +27,14 @@ class FilesystemItem implements Item
 		$this->filesystemPath = $filesystemPath;
 	}
 
+	public function jsonSerialize(): array
+	{
+		return [
+			'name' => $this->getName(),
+			'title' => $this->getTitle(),
+		];
+	}
+
 	public function getName()
 	{
 		return basename( $this->filesystemPath );
