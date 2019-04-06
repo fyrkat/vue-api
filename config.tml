@@ -1,0 +1,6 @@
+# this is the config file for vue-api
+
+[root_collection]
+type = "filesystem"
+path = "/pub/media"
+
