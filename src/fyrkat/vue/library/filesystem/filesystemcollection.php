@@ -18,26 +18,19 @@ class FilesystemCollection extends FilesystemItem implements Collection
 	public function jsonSerialize(): array
 	{
 		return parent::jsonSerialize() + [
-			'items' => $this->listItemNames(),
+			'items' => $this->listItems(),
 		];
-	}
-
-	public function listItemNames(): array
-	{
-		$result = [];
-		if ( $dh = opendir( $this->filesystemPath ) ) {
-			while( ( $file = readdir( $dh ) ) !== false ) {
-				if ( '.' === substr( $file, 0, 1 ) ) continue;
-				$result[] = $file;
-			}
-			closedir( $dh );
-		}
-		return $result;
 	}
 
 	public function yieldItems(): \Generator
 	{
-		return array_map( [$this, 'getItemByName'], $this->listItemNames() );
+		if ( $dh = opendir( $this->filesystemPath ) ) {
+			while( ( $file = readdir( $dh ) ) !== false ) {
+				if ( '.' === substr( $file, 0, 1 ) ) continue;
+				yield new FilesystemItem( "{$this->filesystemPath}/$file" );
+			}
+			closedir( $dh );
+		}
 	}
 
 	public function listItems(): array
