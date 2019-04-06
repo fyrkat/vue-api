@@ -3,4 +3,4 @@
 [root_collection]
 type = "filesystem"
 path = "/pub/media"
-
+base_url = "http://localhost:1081/api"
