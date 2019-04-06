@@ -1,6 +1,6 @@
 .PHONY: dev
 
-dev: vendor
+dev: vendor etc/vue-api.toml
 	php -S '[::1]:1080' www/http.php -d error_reporting=E_ALL -d display_errors=1
 
 vendor: composer.phar composer.json composer.lock
@@ -10,3 +10,6 @@ vendor: composer.phar composer.json composer.lock
 
 composer.phar:
 	curl -O https://getcomposer.org/composer.phar
+
+etc/vue-api.toml:
+	cp etc/vue-api.dist.toml etc/vue-api.toml

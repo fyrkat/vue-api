@@ -11,7 +11,7 @@ class VueConfig {
 	public static function getConfig(): VueConfig
 	{
 		if ( null === static::$globalConfig ) {
-			$configFile = implode( DIRECTORY_SEPARATOR, [dirname( __DIR__, 4 ), 'config.toml'] );
+			$configFile = implode( DIRECTORY_SEPARATOR, [dirname( __DIR__, 4 ), 'etc', 'vue-api.toml'] );
 			$config = Toml::ParseFile( $configFile );
 			static::$globalConfig = new VueConfig( $config );
 		}
