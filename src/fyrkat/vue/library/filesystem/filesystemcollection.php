@@ -17,9 +17,16 @@ class FilesystemCollection extends FilesystemItem implements Collection
 
 	public function jsonSerialize(): array
 	{
-		return parent::jsonSerialize() + [
-			'items' => $this->listItems(),
-		];
+		$items = [];
+		foreach($this->listItems() as $item) {
+			$items[] = [
+				'name' => $item->getName(),
+				'type' => $item->getType(),
+			];
+		}
+		return [
+			'items' => $items,
+		] + parent::jsonSerialize();
 	}
 
 	public function yieldItems(): \Generator
@@ -27,10 +34,15 @@ class FilesystemCollection extends FilesystemItem implements Collection
 		if ( $dh = opendir( $this->filesystemPath ) ) {
 			while( ( $file = readdir( $dh ) ) !== false ) {
 				if ( '.' === substr( $file, 0, 1 ) ) continue;
-				yield new FilesystemItem( "{$this->filesystemPath}/$file" );
+				yield FilesystemItem::getItemByFilesystemPath( "{$this->filesystemPath}/$file" );
 			}
 			closedir( $dh );
 		}
+	}
+
+	public function getType()
+	{
+		return array_merge( parent::getType(), ['collection'] );
 	}
 
 	public function listItems(): array

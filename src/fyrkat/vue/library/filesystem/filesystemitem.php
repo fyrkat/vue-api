@@ -32,7 +32,13 @@ class FilesystemItem implements Item
 		return [
 			'name' => $this->getName(),
 			'title' => $this->getTitle(),
+			'type' => $this->getType(),
 		];
+	}
+
+	public function getType()
+	{
+		return ['filesystem'];
 	}
 
 	public function getName()

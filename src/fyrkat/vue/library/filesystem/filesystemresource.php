@@ -10,4 +10,8 @@ class FilesystemResource extends FilesystemItem implements Resource
 	{
 		return hash_file( 'sha1', $this->filesystemPath );
 	}
+	public function getType()
+	{
+		return array_merge( parent::getType(), ['resource'] );
+	}
 }
