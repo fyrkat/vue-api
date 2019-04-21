@@ -31,7 +31,6 @@ class FilesystemItem implements Item
 	{
 		return [
 			'name' => $this->getName(),
-			'title' => $this->getTitle(),
 			'type' => $this->getType(),
 		];
 	}
@@ -49,20 +48,5 @@ class FilesystemItem implements Item
 	public function getTitle()
 	{
 		return $this->getName();
-	}
-
-	public function getImage()
-	{
-		return null;
-	}
-
-	public function getDescription()
-	{
-		return null;
-	}
-
-	public function getReleaseDate()
-	{
-		return null;
 	}
 }

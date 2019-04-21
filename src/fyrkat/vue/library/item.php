@@ -6,8 +6,4 @@ interface Item extends \JsonSerializable
 {
 	function getName();
 	function getType();
-	function getTitle();
-	function getImage();
-	function getDescription();
-	function getReleaseDate();
 }
