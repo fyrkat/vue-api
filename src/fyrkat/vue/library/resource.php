@@ -4,5 +4,6 @@ namespace fyrkat\vue\library;
 
 interface Resource extends Item
 {
-	function getSha1();
+	function getUniqueIdentifier();
+	function passThroughHttp();
 }
