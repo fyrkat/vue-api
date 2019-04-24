@@ -27,12 +27,14 @@ final class VueApp {
 		return $this->config->getBaseUrl();
 	}
 
-	public function dispatchItem( $path ): \JsonSerializable
+	public function dispatchItem( $urlencodedPath ): \JsonSerializable
 	{
+		$path = rawurldecode( $urlencodedPath );
 		$item = $this->getRootCollection();
 		$segments = explode( '/', $path );
 		foreach( $segments as $segment ) {
 			if ( ! ( $item instanceof Collection ) ) {
+				// $item->getItemByName( string ) is only in Collection
 				throw new \Exception( '404 Not Found' );
 			}
 			if ( '' === $segment ) continue;
