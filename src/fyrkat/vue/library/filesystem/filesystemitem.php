@@ -14,6 +14,9 @@ class FilesystemItem implements Item
 		if ( is_file( $filesystemPath ) ) {
 			return new FilesystemResource( $filesystemPath );
 		}
+		if ( !file_exists( $filesystemPath ) ) {
+			throw new \Exception( "Filesystem path not found: $filesystemPath", 404 );
+		}
 		throw new \Exception( "Cannot use in library: $filesystemPath" );
 	}
 
